@@ -1,0 +1,137 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.5rem;
+
+    /* Ronaldo Template Colors */
+    --light-blue: 217 95% 95%;
+    --navy-blue: 224 70% 20%;
+    --dark-blue: 226 65% 12%;
+    --bright-blue: 220 100% 58%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 48%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-poppins;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold;
+  }
+}
+
+@layer components {
+  .container-custom {
+    @apply max-w-[1200px] mx-auto px-4 md:px-6;
+  }
+
+  .section-title {
+    @apply text-3xl md:text-4xl font-bold mb-2;
+  }
+
+  .section-subtitle {
+    @apply text-base text-muted-foreground mb-10 max-w-xl;
+  }
+
+  .progress-bar {
+    @apply h-1 w-full bg-gray-200 rounded-full overflow-hidden;
+  }
+
+  .progress-bar-fill {
+    @apply h-full bg-blue-500 transition-all duration-500;
+  }
+
+  .tab-custom {
+    @apply py-2 px-4 hover:text-primary cursor-pointer;
+  }
+
+  .tab-active {
+    @apply text-primary border-b-2 border-primary;
+  }
+}
+
+.skill-circle {
+  position: relative;
+  width: 110px;
+  height: 110px;
+}
+
+.skill-circle svg {
+  width: 110px;
+  height: 110px;
+  transform: rotate(-90deg);
+}
+
+.skill-circle circle {
+  width: 100px;
+  height: 100px;
+  fill: none;
+  stroke-width: 4;
+  stroke: #eee;
+  transform: translate(5px, 5px);
+  stroke-dasharray: 314;
+  stroke-dashoffset: 0;
+}
+
+.skill-circle .progress {
+  stroke: hsl(var(--bright-blue));
+  stroke-dasharray: 314;
+  transition: stroke-dashoffset 1s;
+}
+
+.skill-percent {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: hsl(var(--navy-blue));
+}
