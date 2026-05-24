@@ -13,23 +13,46 @@ import ScrollToTop from "./components/ScrollToTop";
 export default function App() {
   return (
     <>
-
-      {/* Hero — sticky, pinned in background at z-0 */}
-      <div className="sticky top-0 h-screen" style={{ zIndex: 0 }}>
+      {/* ── Hero ─────────────────────────────────────────────────────────────
+          Normal document flow, z-index 20.
+          Scrolls away naturally — reveals About sitting behind it.          */}
+      <div style={{ position: "relative", zIndex: 20, height: "100vh" }}>
         <Hero />
       </div>
 
-      {/* All content slides up over the hero like a card from below */}
+      {/* ── About ────────────────────────────────────────────────────────────
+          Sticky at top:0, z-index 10 (behind Hero).
+          margin-top: -100vh pulls it up to share the same viewport as Hero.
+          As Hero scrolls off the top it uncovers About — About never moves.  */}
       <div
-        className="relative"
         style={{
+          position: "sticky",
+          top: 0,
+          height: "100vh",
+          marginTop: "-100vh",
           zIndex: 10,
-          background: "#0a0e17",
-          borderRadius: "2rem 2rem 0 0",
-          boxShadow: "0 -24px 80px rgba(0,0,0,0.7)",
         }}
       >
         <About />
+      </div>
+
+      {/* ── Spacer ───────────────────────────────────────────────────────────
+          Gives About "dwell time" — user fully reads About before the
+          content card slides over it.                                        */}
+      <div style={{ height: "100vh" }} />
+
+      {/* ── Rest of content ──────────────────────────────────────────────────
+          z-index 20, solid background — slides over the sticky About.
+          Sharp top edge + strong shadow = firm card feel.                    */}
+      <div
+        style={{
+          position: "relative",
+          zIndex: 20,
+          background: "#0a0e17",
+          borderTop: "1px solid #1e293b",
+          boxShadow: "0 -16px 60px rgba(0,0,0,0.85)",
+        }}
+      >
         <Pacs />
         <Skills />
         <Experience />
