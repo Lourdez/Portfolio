@@ -9,8 +9,17 @@ const iconMap = { Activity, Cloud, Server, Database, GitBranch, Shield, Radio, M
 
 export default function Skills() {
   return (
-    <section id="skills" className="py-20 md:py-24 px-6">
-      <div className="max-w-[1100px] mx-auto">
+    <section id="skills" className="min-h-screen flex items-center py-32 px-6 relative overflow-hidden">
+      {/* Background watermark */}
+      <div
+        className="absolute left-0 top-1/2 -translate-y-1/2 font-extrabold leading-none text-text-primary opacity-[0.025] select-none pointer-events-none"
+        style={{ fontSize: "clamp(6rem,16vw,16rem)" }}
+        aria-hidden="true"
+      >
+        STACK
+      </div>
+
+      <div className="max-w-[1100px] mx-auto w-full relative z-10">
         <SectionLabel>Skills</SectionLabel>
         <SectionTitle>Technical Arsenal</SectionTitle>
 

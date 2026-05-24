@@ -97,7 +97,7 @@ export default function Hero() {
       id="hero"
       className="min-h-screen flex items-center pt-16 px-6 relative overflow-hidden"
     >
-      {/* Parallax glow orb */}
+      {/* Parallax glow orb — right */}
       <motion.div
         style={{
           y: glowY,
@@ -106,6 +106,15 @@ export default function Hero() {
             "radial-gradient(circle, var(--color-accent-glow) 0%, transparent 70%)",
         }}
         className="absolute -top-1/2 -right-[30%] w-[800px] h-[800px] rounded-full pointer-events-none"
+      />
+      {/* Secondary glow orb — left bottom */}
+      <motion.div
+        style={{
+          y: useTransform(scrollY, [0, 700], [0, 80]),
+          background:
+            "radial-gradient(circle, rgba(0,212,170,0.07) 0%, transparent 70%)",
+        }}
+        className="absolute -bottom-1/3 -left-[20%] w-[600px] h-[600px] rounded-full pointer-events-none"
       />
 
       <div className="max-w-[1100px] mx-auto relative z-10 w-full">

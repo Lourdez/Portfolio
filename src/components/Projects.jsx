@@ -4,8 +4,17 @@ import TiltCard from "./TiltCard";
 
 export default function Projects() {
   return (
-    <section id="projects" className="py-20 md:py-24 px-6">
-      <div className="max-w-[1100px] mx-auto">
+    <section id="projects" className="min-h-screen flex items-center py-32 px-6 relative overflow-hidden">
+      {/* Background watermark */}
+      <div
+        className="absolute right-0 top-1/2 -translate-y-1/2 font-extrabold leading-none text-text-primary opacity-[0.025] select-none pointer-events-none"
+        style={{ fontSize: "clamp(6rem,16vw,16rem)" }}
+        aria-hidden="true"
+      >
+        BUILD
+      </div>
+
+      <div className="max-w-[1100px] mx-auto w-full relative z-10">
         <SectionLabel>Projects</SectionLabel>
         <SectionTitle>What I've Built</SectionTitle>
 

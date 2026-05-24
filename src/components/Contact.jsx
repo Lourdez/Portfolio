@@ -27,29 +27,37 @@ const links = [
   {
     icon: MapPin,
     label: "Location",
-    value: `${personalInfo.location} \u2022 Open to: ${personalInfo.targets}`,
+    value: `${personalInfo.location} • Open to: ${personalInfo.targets}`,
   },
 ];
 
 export default function Contact() {
   return (
-    <section id="contact" className="py-20 md:py-24 px-6 bg-bg-secondary">
-      <div className="max-w-[1100px] mx-auto">
+    <section id="contact" className="min-h-screen flex items-center py-32 px-6 bg-bg-secondary relative overflow-hidden">
+      {/* Background watermark */}
+      <div
+        className="absolute right-0 top-1/2 -translate-y-1/2 font-extrabold leading-none text-text-primary opacity-[0.025] select-none pointer-events-none"
+        style={{ fontSize: "clamp(6rem,16vw,16rem)" }}
+        aria-hidden="true"
+      >
+        TALK
+      </div>
+
+      <div className="max-w-[1100px] mx-auto w-full relative z-10">
         <SectionLabel>Connect</SectionLabel>
         <SectionTitle>Get In Touch</SectionTitle>
 
-        <div className="grid md:grid-cols-2 gap-12 items-start">
+        <div className="grid md:grid-cols-2 gap-16 items-start">
           <div>
             <Reveal>
-              <p className="text-base text-text-secondary mb-8 leading-relaxed">
-                I'm actively looking for DevOps and infrastructure roles in
-                European medtech — particularly in the Netherlands and
-                Switzerland. If you're building healthcare imaging infrastructure,
-                let's talk.
+              <p className="text-lg text-text-secondary mb-10 leading-relaxed max-w-md">
+                Actively looking for DevOps and infrastructure roles in European
+                medtech — Netherlands and Switzerland. If you're building
+                healthcare imaging infrastructure, let's talk.
               </p>
             </Reveal>
 
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-3">
               {links.map((l, i) => {
                 const Tag = l.href ? "a" : "div";
                 return (
@@ -63,16 +71,16 @@ export default function Contact() {
                               : {}),
                           }
                         : {})}
-                      className="flex items-center gap-4 p-4 bg-bg-card border border-border rounded-xl hover:border-border-accent hover:translate-x-1 transition-all"
+                      className="flex items-center gap-4 p-5 bg-bg-card border border-border rounded-xl hover:border-border-accent hover:translate-x-1.5 transition-all group"
                     >
-                      <div className="w-11 h-11 min-w-11 rounded-xl bg-accent-glow border border-border-accent flex items-center justify-center text-accent">
+                      <div className="w-11 h-11 min-w-11 rounded-xl bg-accent-glow border border-border-accent flex items-center justify-center text-accent group-hover:scale-110 transition-transform">
                         <l.icon size={18} />
                       </div>
                       <div>
-                        <div className="text-xs text-text-muted uppercase tracking-wider">
+                        <div className="text-[0.68rem] text-text-muted uppercase tracking-widest font-mono">
                           {l.label}
                         </div>
-                        <div className="text-[0.95rem] text-text-primary font-medium mt-0.5">
+                        <div className="text-[0.95rem] text-text-primary font-semibold mt-0.5">
                           {l.value}
                         </div>
                       </div>
@@ -83,23 +91,22 @@ export default function Contact() {
             </div>
           </div>
 
-          <Reveal delay={1}>
-            <div className="bg-bg-card border border-border rounded-xl p-8 text-center">
-              <div className="w-9 h-9 rounded-lg bg-accent-glow border border-border-accent flex items-center justify-center text-accent mx-auto mb-4">
-                <Globe size={20} />
+          <Reveal delay={2}>
+            <div className="bg-bg-card border border-border rounded-2xl p-10 text-center">
+              <div className="w-12 h-12 rounded-xl bg-accent-glow border border-border-accent flex items-center justify-center text-accent mx-auto mb-6">
+                <Globe size={22} />
               </div>
-              <h3 className="text-xl font-bold mb-3">Open to Relocation</h3>
-              <p className="text-sm text-text-secondary">
+              <h3 className="text-2xl font-extrabold mb-3">Open to Relocation</h3>
+              <p className="text-sm text-text-secondary mb-2">
                 Actively targeting EU medtech hubs
               </p>
-              <p className="mt-2 text-accent font-semibold">
+              <p className="text-accent font-bold text-lg">
                 Netherlands &bull; Switzerland
               </p>
-              <p className="mt-4 text-xs text-text-muted leading-relaxed">
-                Healthcare IT &bull; PACS/RIS &bull; Medical Imaging
-                <br />
-                DevOps &bull; Infrastructure &bull; Cloud
-              </p>
+              <div className="mt-6 pt-6 border-t border-border text-xs text-text-muted leading-relaxed space-y-1">
+                <p>Healthcare IT &bull; PACS/RIS &bull; Medical Imaging</p>
+                <p>DevOps &bull; Infrastructure &bull; Cloud</p>
+              </div>
             </div>
           </Reveal>
         </div>

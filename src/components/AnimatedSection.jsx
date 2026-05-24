@@ -1,14 +1,16 @@
 import { motion } from "framer-motion";
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 48, filter: "blur(10px)", scale: 0.97 },
   visible: (i = 0) => ({
     opacity: 1,
     y: 0,
+    filter: "blur(0px)",
+    scale: 1,
     transition: {
-      duration: 0.6,
+      duration: 0.75,
       ease: [0.16, 1, 0.3, 1],
-      delay: i * 0.1,
+      delay: i * 0.12,
     },
   }),
 };
@@ -19,7 +21,7 @@ export function Reveal({ children, delay = 0, className = "" }) {
       variants={fadeUp}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-40px" }}
+      viewport={{ once: true, margin: "-60px" }}
       custom={delay}
       className={className}
     >
@@ -31,9 +33,9 @@ export function Reveal({ children, delay = 0, className = "" }) {
 export function SectionLabel({ children }) {
   return (
     <Reveal>
-      <div className="flex items-center gap-2.5 mb-3">
-        <span className="w-6 h-px bg-accent" />
-        <span className="font-mono text-xs font-semibold text-accent uppercase tracking-[3px]">
+      <div className="flex items-center gap-3 mb-4">
+        <span className="w-8 h-px bg-accent" />
+        <span className="font-mono text-[0.7rem] font-bold text-accent uppercase tracking-[4px]">
           {children}
         </span>
       </div>
@@ -44,7 +46,10 @@ export function SectionLabel({ children }) {
 export function SectionTitle({ children }) {
   return (
     <Reveal delay={1}>
-      <h2 className="text-3xl md:text-4xl font-bold mb-10 leading-tight">
+      <h2
+        className="font-extrabold leading-[1.05] mb-14 text-text-primary"
+        style={{ fontSize: "clamp(2.8rem, 6vw, 6rem)" }}
+      >
         {children}
       </h2>
     </Reveal>
