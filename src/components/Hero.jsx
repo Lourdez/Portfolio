@@ -1,28 +1,10 @@
-import { useState, useEffect, useRef } from "react";
-import { BookOpen, Mail, ArrowDown } from "lucide-react";
-import {
-  motion,
-  useScroll,
-  useTransform,
-  useInView,
-  useMotionValue,
-  animate,
-} from "framer-motion";
-import { Reveal } from "./AnimatedSection";
-import { personalInfo } from "../data/portfolio";
-import GithubIcon from "./GithubIcon";
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 
 const roles = [
   "DevOps Engineer",
-  "PACS Infrastructure Specialist",
-  "Healthcare IT Engineer",
-];
-
-const stats = [
-  { numeric: 35, prefix: "", suffix: "+", label: "Services in Production" },
-  { numeric: 3, prefix: "", suffix: "-node", label: "PostgreSQL HA Cluster" },
-  { numeric: 15, prefix: "~", suffix: "s", label: "Automated Failover" },
-  { numeric: 7, prefix: "", suffix: "", label: "Jenkins Pipelines" },
+  "Healthcare — Radiology Specialist",
+  "Infrastructure Engineer",
 ];
 
 function useTypewriter(texts, typingSpeed = 65, deleteSpeed = 38, pause = 2400) {
@@ -55,162 +37,77 @@ function useTypewriter(texts, typingSpeed = 65, deleteSpeed = 38, pause = 2400) 
   return display;
 }
 
-function StatCounter({ numeric, prefix, suffix, label }) {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true });
-  const count = useMotionValue(0);
-  const [display, setDisplay] = useState(0);
-
-  useEffect(() => {
-    if (!inView) return;
-    const controls = animate(count, numeric, {
-      duration: 1.6,
-      ease: "easeOut",
-      onUpdate: (v) => setDisplay(Math.round(v)),
-    });
-    return controls.stop;
-  }, [inView, numeric, count]);
-
-  return (
-    <div
-      ref={ref}
-      className="bg-bg-card border border-border rounded-xl p-4 text-center hover:border-border-accent transition-colors"
-    >
-      <div className="font-mono text-xl font-bold text-accent">
-        {prefix}
-        {display}
-        {suffix}
-      </div>
-      <div className="text-[0.65rem] text-text-muted mt-1 leading-tight">{label}</div>
-    </div>
-  );
-}
-
 export default function Hero() {
   const role = useTypewriter(roles);
-  const { scrollY } = useScroll();
-  const glowY = useTransform(scrollY, [0, 700], [0, -180]);
-  const glowScale = useTransform(scrollY, [0, 700], [1, 1.15]);
 
   return (
     <section
       id="hero"
-      className="min-h-screen flex items-center pt-16 px-6 relative overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      {/* Parallax glow orb — right */}
-      <motion.div
-        style={{
-          y: glowY,
-          scale: glowScale,
-          background:
-            "radial-gradient(circle, var(--color-accent-glow) 0%, transparent 70%)",
-        }}
-        className="absolute -top-1/2 -right-[30%] w-[800px] h-[800px] rounded-full pointer-events-none"
-      />
-      {/* Secondary glow orb — left bottom */}
-      <motion.div
-        style={{
-          y: useTransform(scrollY, [0, 700], [0, 80]),
-          background:
-            "radial-gradient(circle, rgba(0,212,170,0.07) 0%, transparent 70%)",
-        }}
-        className="absolute -bottom-1/3 -left-[20%] w-[600px] h-[600px] rounded-full pointer-events-none"
+      {/* GIF background */}
+      <img
+        src="/loop_style.gif"
+        alt=""
+        aria-hidden="true"
+        className="absolute inset-0 w-full h-full object-cover"
       />
 
-      <div className="max-w-[1100px] mx-auto relative z-10 w-full">
-        <Reveal>
-          <div className="font-mono text-sm text-accent mb-5 inline-flex items-center gap-2">
-            <span
-              className="inline-block w-0.5 h-4 bg-accent"
-              style={{ animation: "blink 1s step-end infinite" }}
-            />
-            lourdez@infra ~
-          </div>
-        </Reveal>
+      {/* Dark overlay — lets GIF show through while keeping text readable */}
+      <div className="absolute inset-0 bg-bg-primary/65" />
 
-        <Reveal delay={1}>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[1.1] mb-2">
-            {personalInfo.name}{" "}
-            <span className="text-accent">{personalInfo.lastName}</span>
-          </h1>
+      {/* Subtle vignette for cinematic depth */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse at center, transparent 40%, rgba(10,14,23,0.7) 100%)",
+        }}
+      />
 
-          {/* Typewriter role */}
-          <p className="text-lg md:text-xl text-text-secondary font-medium mb-6 h-8 flex items-center">
+      {/* Centered content */}
+      <div className="relative z-10 text-center px-6 select-none">
+        <motion.h1
+          initial={{ opacity: 0, y: 40, filter: "blur(12px)" }}
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
+          className="font-extrabold leading-[1.05] text-text-primary"
+          style={{ fontSize: "clamp(3rem, 9vw, 9rem)", letterSpacing: "-0.02em" }}
+        >
+          Lourdez{" "}
+          <span className="text-accent">Parker</span>
+        </motion.h1>
+
+        {/* Typewriter role */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.9 }}
+          className="mt-5 h-9 flex items-center justify-center"
+        >
+          <span className="font-mono text-lg md:text-xl text-text-secondary tracking-wide">
             {role}
-            <span
-              className="inline-block w-[2px] h-5 bg-accent ml-1"
-              style={{ animation: "blink 1s step-end infinite" }}
-            />
-          </p>
-        </Reveal>
+          </span>
+          <span
+            className="inline-block w-[2px] h-6 bg-accent ml-1 mb-0.5"
+            style={{ animation: "blink 1s step-end infinite" }}
+          />
+        </motion.div>
 
-        <Reveal delay={2}>
-          <p className="text-base text-text-muted max-w-[600px] mb-9 leading-relaxed">
-            {personalInfo.tagline}
-          </p>
-        </Reveal>
-
-        <Reveal delay={3}>
-          <div className="flex gap-4 flex-wrap">
-            <a
-              href="#projects"
-              className="inline-flex items-center gap-2 px-7 py-3 rounded-md text-sm font-semibold bg-accent text-bg-primary hover:shadow-[0_0_24px_var(--color-accent-dim)] hover:-translate-y-0.5 transition-all"
-            >
-              <BookOpen size={16} /> View Projects
-            </a>
-            <a
-              href="#contact"
-              className="inline-flex items-center gap-2 px-7 py-3 rounded-md text-sm font-semibold bg-transparent text-accent border border-border-accent hover:bg-accent-glow hover:border-accent hover:-translate-y-0.5 transition-all"
-            >
-              <Mail size={16} /> Contact Me
-            </a>
-            <a
-              href={personalInfo.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-3 rounded-md text-sm font-semibold bg-transparent text-text-secondary border border-border hover:text-accent hover:border-border-accent hover:-translate-y-0.5 transition-all"
-              aria-label="GitHub profile"
-            >
-              <GithubIcon size={16} />
-            </a>
-          </div>
-        </Reveal>
-
-        {/* Count-up stats */}
-        <Reveal delay={4}>
-          <div className="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-[640px]">
-            {stats.map((s) => (
-              <StatCounter key={s.label} {...s} />
-            ))}
-          </div>
-        </Reveal>
-
-        <Reveal delay={5}>
-          <div className="mt-10 flex gap-8 flex-wrap">
-            {[
-              "Open to EU relocation",
-              "Learning German (B2 target)",
-              "Healthcare IT focused",
-            ].map((text) => (
-              <div key={text} className="text-xs text-text-muted flex items-center gap-2">
-                <span
-                  className="w-2 h-2 rounded-full bg-accent"
-                  style={{ animation: "pulse-dot 2s ease-in-out infinite" }}
-                />
-                {text}
-              </div>
-            ))}
-          </div>
-        </Reveal>
-
-        <Reveal delay={6}>
-          <a
-            href="#about"
-            className="mt-16 inline-flex items-center gap-2 text-xs text-text-muted hover:text-accent transition-colors"
-          >
-            <ArrowDown size={14} /> Scroll to explore
-          </a>
-        </Reveal>
+        {/* Scroll hint */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 2.2, duration: 1 }}
+          className="mt-16 flex flex-col items-center gap-2 text-text-muted"
+        >
+          <span className="text-[0.65rem] font-mono uppercase tracking-[4px]">Scroll</span>
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }}
+            className="w-px h-10 bg-gradient-to-b from-accent to-transparent"
+          />
+        </motion.div>
       </div>
     </section>
   );
