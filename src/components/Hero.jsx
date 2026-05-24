@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 const roles = [
   "DevOps Engineer",
@@ -39,34 +39,53 @@ function useTypewriter(texts, typingSpeed = 65, deleteSpeed = 38, pause = 2400) 
 
 export default function Hero() {
   const role = useTypewriter(roles);
+  const { scrollY } = useScroll();
+
+  // As the content card slides over the hero, parallax the inner elements
+  const vh = typeof window !== "undefined" ? window.innerHeight : 800;
+
+  // GIF scales slightly — creates depth while being covered
+  const gifScale = useTransform(scrollY, [0, vh * 0.8], [1, 1.12]);
+
+  // Content drifts upward and fades out
+  const contentY = useTransform(scrollY, [0, vh * 0.7], [0, -80]);
+  const contentOpacity = useTransform(scrollY, [0, vh * 0.55], [1, 0]);
 
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      className="relative h-screen flex items-center justify-center overflow-hidden"
     >
-      {/* GIF background */}
-      <img
-        src="/loop_style.gif"
-        alt=""
-        aria-hidden="true"
-        className="absolute inset-0 w-full h-full object-cover"
-      />
+      {/* GIF — subtly scales as content slides over (parallax depth) */}
+      <motion.div
+        style={{ scale: gifScale }}
+        className="absolute inset-0 w-full h-full"
+      >
+        <img
+          src="/loop_style.gif"
+          alt=""
+          aria-hidden="true"
+          className="w-full h-full object-cover"
+        />
+      </motion.div>
 
-      {/* Dark overlay — lets GIF show through while keeping text readable */}
+      {/* Dark overlay */}
       <div className="absolute inset-0 bg-bg-primary/65" />
 
-      {/* Subtle vignette for cinematic depth */}
+      {/* Vignette */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse at center, transparent 40%, rgba(10,14,23,0.7) 100%)",
+            "radial-gradient(ellipse at center, transparent 35%, rgba(10,14,23,0.75) 100%)",
         }}
       />
 
-      {/* Centered content */}
-      <div className="relative z-10 text-center px-6 select-none">
+      {/* Content — drifts up + fades as About slides over */}
+      <motion.div
+        style={{ y: contentY, opacity: contentOpacity }}
+        className="relative z-10 text-center px-6 select-none"
+      >
         <motion.h1
           initial={{ opacity: 0, y: 40, filter: "blur(12px)" }}
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
@@ -78,7 +97,7 @@ export default function Hero() {
           <span className="text-accent">Parker</span>
         </motion.h1>
 
-        {/* Typewriter role */}
+        {/* Typewriter */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -108,7 +127,7 @@ export default function Hero() {
             className="w-px h-10 bg-gradient-to-b from-accent to-transparent"
           />
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   );
 }

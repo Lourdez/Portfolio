@@ -16,6 +16,8 @@ export default function About() {
       id="about"
       className="min-h-screen flex items-center py-24 px-6 relative overflow-hidden"
     >
+      {/* Thin accent line at the top of the card — visible as it rises over the hero */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-16 h-1 rounded-full bg-accent opacity-40 mt-4" />
       {/* Background large text watermark */}
       <div
         className="absolute right-0 top-1/2 -translate-y-1/2 font-extrabold text-[clamp(6rem,18vw,18rem)] leading-none text-text-primary opacity-[0.02] select-none pointer-events-none whitespace-nowrap"
