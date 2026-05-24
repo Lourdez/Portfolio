@@ -1,4 +1,3 @@
-import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import About from "./components/About";
 import Pacs from "./components/Pacs";
@@ -13,7 +12,6 @@ import ScrollToTop from "./components/ScrollToTop";
 export default function App() {
   return (
     <>
-      <Navbar />
 
       {/* Hero — sticky, pinned in background at z-0 */}
       <div className="sticky top-0 h-screen" style={{ zIndex: 0 }}>
