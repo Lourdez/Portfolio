@@ -1,24 +1,111 @@
+import { useState, useEffect, useRef } from "react";
 import { BookOpen, Mail, ArrowDown } from "lucide-react";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useInView,
+  useMotionValue,
+  animate,
+} from "framer-motion";
 import { Reveal } from "./AnimatedSection";
 import { personalInfo } from "../data/portfolio";
 import GithubIcon from "./GithubIcon";
 
-const stats = [
-  { value: "35+", label: "Services in Production" },
-  { value: "3-node", label: "PostgreSQL HA Cluster" },
-  { value: "~15s", label: "Automated Failover" },
-  { value: "7", label: "Jenkins Pipelines" },
+const roles = [
+  "DevOps Engineer",
+  "PACS Infrastructure Specialist",
+  "Healthcare IT Engineer",
 ];
 
-export default function Hero() {
+const stats = [
+  { numeric: 35, prefix: "", suffix: "+", label: "Services in Production" },
+  { numeric: 3, prefix: "", suffix: "-node", label: "PostgreSQL HA Cluster" },
+  { numeric: 15, prefix: "~", suffix: "s", label: "Automated Failover" },
+  { numeric: 7, prefix: "", suffix: "", label: "Jenkins Pipelines" },
+];
+
+function useTypewriter(texts, typingSpeed = 65, deleteSpeed = 38, pause = 2400) {
+  const [display, setDisplay] = useState("");
+  const [index, setIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const current = texts[index];
+    let timeout;
+    if (!isDeleting && display === current) {
+      timeout = setTimeout(() => setIsDeleting(true), pause);
+    } else if (isDeleting && display === "") {
+      setIsDeleting(false);
+      setIndex((i) => (i + 1) % texts.length);
+    } else if (isDeleting) {
+      timeout = setTimeout(
+        () => setDisplay(current.slice(0, display.length - 1)),
+        deleteSpeed
+      );
+    } else {
+      timeout = setTimeout(
+        () => setDisplay(current.slice(0, display.length + 1)),
+        typingSpeed
+      );
+    }
+    return () => clearTimeout(timeout);
+  }, [display, isDeleting, index, texts, typingSpeed, deleteSpeed, pause]);
+
+  return display;
+}
+
+function StatCounter({ numeric, prefix, suffix, label }) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true });
+  const count = useMotionValue(0);
+  const [display, setDisplay] = useState(0);
+
+  useEffect(() => {
+    if (!inView) return;
+    const controls = animate(count, numeric, {
+      duration: 1.6,
+      ease: "easeOut",
+      onUpdate: (v) => setDisplay(Math.round(v)),
+    });
+    return controls.stop;
+  }, [inView, numeric, count]);
+
   return (
-    <section id="hero" className="min-h-screen flex items-center pt-16 px-6 relative overflow-hidden">
-      {/* Glow */}
-      <div
-        className="absolute -top-1/2 -right-[30%] w-[800px] h-[800px] rounded-full pointer-events-none"
+    <div
+      ref={ref}
+      className="bg-bg-card border border-border rounded-xl p-4 text-center hover:border-border-accent transition-colors"
+    >
+      <div className="font-mono text-xl font-bold text-accent">
+        {prefix}
+        {display}
+        {suffix}
+      </div>
+      <div className="text-[0.65rem] text-text-muted mt-1 leading-tight">{label}</div>
+    </div>
+  );
+}
+
+export default function Hero() {
+  const role = useTypewriter(roles);
+  const { scrollY } = useScroll();
+  const glowY = useTransform(scrollY, [0, 700], [0, -180]);
+  const glowScale = useTransform(scrollY, [0, 700], [1, 1.15]);
+
+  return (
+    <section
+      id="hero"
+      className="min-h-screen flex items-center pt-16 px-6 relative overflow-hidden"
+    >
+      {/* Parallax glow orb */}
+      <motion.div
         style={{
-          background: "radial-gradient(circle, var(--color-accent-glow) 0%, transparent 70%)",
+          y: glowY,
+          scale: glowScale,
+          background:
+            "radial-gradient(circle, var(--color-accent-glow) 0%, transparent 70%)",
         }}
+        className="absolute -top-1/2 -right-[30%] w-[800px] h-[800px] rounded-full pointer-events-none"
       />
 
       <div className="max-w-[1100px] mx-auto relative z-10 w-full">
@@ -37,8 +124,14 @@ export default function Hero() {
             {personalInfo.name}{" "}
             <span className="text-accent">{personalInfo.lastName}</span>
           </h1>
-          <p className="text-lg md:text-xl text-text-secondary font-medium mb-6">
-            {personalInfo.role}
+
+          {/* Typewriter role */}
+          <p className="text-lg md:text-xl text-text-secondary font-medium mb-6 h-8 flex items-center">
+            {role}
+            <span
+              className="inline-block w-[2px] h-5 bg-accent ml-1"
+              style={{ animation: "blink 1s step-end infinite" }}
+            />
           </p>
         </Reveal>
 
@@ -74,33 +167,30 @@ export default function Hero() {
           </div>
         </Reveal>
 
+        {/* Count-up stats */}
         <Reveal delay={4}>
           <div className="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-[640px]">
             {stats.map((s) => (
-              <div
-                key={s.label}
-                className="bg-bg-card border border-border rounded-xl p-4 text-center hover:border-border-accent transition-colors"
-              >
-                <div className="font-mono text-xl font-bold text-accent">{s.value}</div>
-                <div className="text-[0.65rem] text-text-muted mt-1 leading-tight">{s.label}</div>
-              </div>
+              <StatCounter key={s.label} {...s} />
             ))}
           </div>
         </Reveal>
 
         <Reveal delay={5}>
           <div className="mt-10 flex gap-8 flex-wrap">
-            {["Open to EU relocation", "Learning German (B2 target)", "Healthcare IT focused"].map(
-              (text) => (
-                <div key={text} className="text-xs text-text-muted flex items-center gap-2">
-                  <span
-                    className="w-2 h-2 rounded-full bg-accent"
-                    style={{ animation: "pulse-dot 2s ease-in-out infinite" }}
-                  />
-                  {text}
-                </div>
-              )
-            )}
+            {[
+              "Open to EU relocation",
+              "Learning German (B2 target)",
+              "Healthcare IT focused",
+            ].map((text) => (
+              <div key={text} className="text-xs text-text-muted flex items-center gap-2">
+                <span
+                  className="w-2 h-2 rounded-full bg-accent"
+                  style={{ animation: "pulse-dot 2s ease-in-out infinite" }}
+                />
+                {text}
+              </div>
+            ))}
           </div>
         </Reveal>
 
@@ -108,7 +198,6 @@ export default function Hero() {
           <a
             href="#about"
             className="mt-16 inline-flex items-center gap-2 text-xs text-text-muted hover:text-accent transition-colors"
-            style={{ animation: "pulse-dot 3s ease-in-out infinite" }}
           >
             <ArrowDown size={14} /> Scroll to explore
           </a>
