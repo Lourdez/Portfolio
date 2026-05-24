@@ -1,6 +1,14 @@
-import { BookOpen, Mail } from "lucide-react";
+import { BookOpen, Mail, ArrowDown } from "lucide-react";
 import { Reveal } from "./AnimatedSection";
 import { personalInfo } from "../data/portfolio";
+import GithubIcon from "./GithubIcon";
+
+const stats = [
+  { value: "35+", label: "Services in Production" },
+  { value: "3-node", label: "PostgreSQL HA Cluster" },
+  { value: "~15s", label: "Automated Failover" },
+  { value: "7", label: "Jenkins Pipelines" },
+];
 
 export default function Hero() {
   return (
@@ -13,7 +21,7 @@ export default function Hero() {
         }}
       />
 
-      <div className="max-w-[1100px] mx-auto relative z-10">
+      <div className="max-w-[1100px] mx-auto relative z-10 w-full">
         <Reveal>
           <div className="font-mono text-sm text-accent mb-5 inline-flex items-center gap-2">
             <span
@@ -54,11 +62,34 @@ export default function Hero() {
             >
               <Mail size={16} /> Contact Me
             </a>
+            <a
+              href={personalInfo.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-md text-sm font-semibold bg-transparent text-text-secondary border border-border hover:text-accent hover:border-border-accent hover:-translate-y-0.5 transition-all"
+              aria-label="GitHub profile"
+            >
+              <GithubIcon size={16} />
+            </a>
           </div>
         </Reveal>
 
-        <Reveal delay={3}>
-          <div className="mt-12 flex gap-8 flex-wrap">
+        <Reveal delay={4}>
+          <div className="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-[640px]">
+            {stats.map((s) => (
+              <div
+                key={s.label}
+                className="bg-bg-card border border-border rounded-xl p-4 text-center hover:border-border-accent transition-colors"
+              >
+                <div className="font-mono text-xl font-bold text-accent">{s.value}</div>
+                <div className="text-[0.65rem] text-text-muted mt-1 leading-tight">{s.label}</div>
+              </div>
+            ))}
+          </div>
+        </Reveal>
+
+        <Reveal delay={5}>
+          <div className="mt-10 flex gap-8 flex-wrap">
             {["Open to EU relocation", "Learning German (B2 target)", "Healthcare IT focused"].map(
               (text) => (
                 <div key={text} className="text-xs text-text-muted flex items-center gap-2">
@@ -71,6 +102,16 @@ export default function Hero() {
               )
             )}
           </div>
+        </Reveal>
+
+        <Reveal delay={6}>
+          <a
+            href="#about"
+            className="mt-16 inline-flex items-center gap-2 text-xs text-text-muted hover:text-accent transition-colors"
+            style={{ animation: "pulse-dot 3s ease-in-out infinite" }}
+          >
+            <ArrowDown size={14} /> Scroll to explore
+          </a>
         </Reveal>
       </div>
     </section>

@@ -8,6 +8,7 @@ import Projects from "./components/Projects";
 import Certifications from "./components/Certifications";
 import Education from "./components/Education";
 import Contact from "./components/Contact";
+import ScrollToTop from "./components/ScrollToTop";
 
 export default function App() {
   return (
@@ -27,6 +28,7 @@ export default function App() {
           &copy; 2025 Lourdez Parker — Built with React + Vite + Tailwind CSS
         </p>
       </footer>
+      <ScrollToTop />
     </>
   );
 }

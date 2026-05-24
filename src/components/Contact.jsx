@@ -1,6 +1,7 @@
 import { Mail, ExternalLink, MapPin, Globe } from "lucide-react";
 import { Reveal, SectionLabel, SectionTitle } from "./AnimatedSection";
 import { personalInfo } from "../data/portfolio";
+import GithubIcon from "./GithubIcon";
 
 const links = [
   {
@@ -14,6 +15,13 @@ const links = [
     label: "LinkedIn",
     value: "Lourdez Parker",
     href: personalInfo.linkedin,
+    external: true,
+  },
+  {
+    icon: GithubIcon,
+    label: "GitHub",
+    value: "github.com/Lourdez",
+    href: personalInfo.github,
     external: true,
   },
   {

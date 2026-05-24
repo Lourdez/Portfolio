@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --color-accent: #00d4aa;
+  --color-accent-glow: #00d4aa22;
+  --color-accent-dim: #00d4aa33;
+}
+
 html {
   scroll-behavior: smooth;
 }

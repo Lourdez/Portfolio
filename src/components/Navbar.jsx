@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
-import { navLinks } from "../data/portfolio";
+import { navLinks, personalInfo } from "../data/portfolio";
+import GithubIcon from "./GithubIcon";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -34,7 +35,7 @@ export default function Navbar() {
         </div>
 
         {/* Desktop */}
-        <ul className="hidden md:flex gap-7 list-none">
+        <ul className="hidden md:flex gap-7 list-none items-center">
           {navLinks.map((l) => (
             <li key={l.href}>
               <a
@@ -49,6 +50,17 @@ export default function Navbar() {
               </a>
             </li>
           ))}
+          <li>
+            <a
+              href={personalInfo.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-text-secondary hover:text-accent transition-colors"
+              aria-label="GitHub"
+            >
+              <GithubIcon size={18} />
+            </a>
+          </li>
         </ul>
 
         {/* Hamburger */}

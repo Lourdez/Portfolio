@@ -1,28 +1,6 @@
 import { Reveal, SectionLabel, SectionTitle } from "./AnimatedSection";
 import { experience } from "../data/portfolio";
 
-function CategoryBlock({ cat }) {
-  return (
-    <div className="mb-5">
-      {cat.title && (
-        <div className="text-xs font-bold text-accent mb-2.5 font-mono uppercase tracking-wider flex items-center gap-2">
-          {cat.title}
-          <span className="flex-1 h-px bg-border" />
-        </div>
-      )}
-      <ul className="flex flex-col gap-2 list-none">
-        {cat.items.map((item, i) => (
-          <li
-            key={i}
-            className="pl-5 relative text-sm text-text-secondary leading-relaxed before:content-[''] before:absolute before:left-0 before:top-[10px] before:w-1.5 before:h-1.5 before:rounded-full before:border-[1.5px] before:border-accent"
-          />
-        ))}
-      </ul>
-      {/* Re-render items with text since before pseudo-elements need separate handling */}
-    </div>
-  );
-}
-
 export default function Experience() {
   return (
     <section id="experience" className="py-20 md:py-24 px-6 bg-bg-secondary">

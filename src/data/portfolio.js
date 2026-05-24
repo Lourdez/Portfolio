@@ -6,6 +6,7 @@ export const personalInfo = {
     "Building reliable, secure infrastructure for medical imaging systems — PACS, RIS, DICOM. Production uptime, not sandbox experiments.",
   email: "lourdezparker@gmail.com",
   linkedin: "https://www.linkedin.com/in/lourdez-parker-",
+  github: "https://github.com/Lourdez",
   location: "Tamil Nadu, India",
   targets: "Amsterdam, Zurich, Basel",
   language: "German (targeting B2)",
