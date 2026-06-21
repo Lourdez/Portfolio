@@ -1,11 +1,10 @@
 <script setup>
-import { MapPin, Globe, BookOpen, Star } from 'lucide-vue-next'
+import { MapPin, BookOpen, Star } from 'lucide-vue-next'
 import { Reveal, SectionLabel } from './AnimatedSection.js'
 import { personalInfo, aboutText } from '../data/portfolio.js'
 
 const details = [
   { icon: MapPin, label: 'Location', value: personalInfo.location },
-  { icon: Globe, label: 'Targeting', value: personalInfo.targets },
   { icon: BookOpen, label: 'Language', value: personalInfo.language },
   { icon: Star, label: 'Goal', value: personalInfo.goal },
 ]
