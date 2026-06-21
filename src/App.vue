@@ -31,56 +31,56 @@ import ScrollToTop from './components/ScrollToTop.vue'
 
   <!-- ② ABOUT — z-80, behind Hero -->
   <div style="position: relative; z-index: 80; height: 200vh; margin-top: -100vh">
-    <div style="position: sticky; top: 0; height: 100vh; overflow: hidden">
+    <div style="position: sticky; top: 0; height: 100vh; overflow: hidden; background: #0a0e17">
       <About />
     </div>
   </div>
 
   <!-- ③ PACS — z-70, behind About -->
   <div style="position: relative; z-index: 70; height: 200vh; margin-top: -100vh">
-    <div style="position: sticky; top: 0; height: 100vh; overflow: hidden">
+    <div style="position: sticky; top: 0; height: 100vh; overflow: hidden; background: #111827">
       <Pacs />
     </div>
   </div>
 
   <!-- ④ SKILLS — z-60, behind Pacs -->
   <div style="position: relative; z-index: 60; height: 200vh; margin-top: -100vh">
-    <div style="position: sticky; top: 0; height: 100vh; overflow: hidden">
+    <div style="position: sticky; top: 0; height: 100vh; overflow: hidden; background: #0a0e17">
       <Skills />
     </div>
   </div>
 
   <!-- ⑤ EXPERIENCE — z-50, behind Skills -->
   <div style="position: relative; z-index: 50; height: 200vh; margin-top: -100vh">
-    <div style="position: sticky; top: 0; height: 100vh; overflow: hidden">
+    <div style="position: sticky; top: 0; height: 100vh; overflow: hidden; background: #111827">
       <Experience />
     </div>
   </div>
 
   <!-- ⑥ PROJECTS — z-40, behind Experience -->
   <div style="position: relative; z-index: 40; height: 200vh; margin-top: -100vh">
-    <div style="position: sticky; top: 0; height: 100vh; overflow: hidden">
+    <div style="position: sticky; top: 0; height: 100vh; overflow: hidden; background: #0a0e17">
       <Projects />
     </div>
   </div>
 
   <!-- ⑦ CERTIFICATIONS — z-30, behind Projects -->
   <div style="position: relative; z-index: 30; height: 200vh; margin-top: -100vh">
-    <div style="position: sticky; top: 0; height: 100vh; overflow: hidden">
+    <div style="position: sticky; top: 0; height: 100vh; overflow: hidden; background: #111827">
       <Certifications />
     </div>
   </div>
 
   <!-- ⑧ EDUCATION — z-20, behind Certifications -->
   <div style="position: relative; z-index: 20; height: 200vh; margin-top: -100vh">
-    <div style="position: sticky; top: 0; height: 100vh; overflow: hidden">
+    <div style="position: sticky; top: 0; height: 100vh; overflow: hidden; background: #0a0e17">
       <Education />
     </div>
   </div>
 
   <!-- ⑨ CONTACT — z-10, behind Education -->
   <div style="position: relative; z-index: 10; height: 200vh; margin-top: -100vh">
-    <div style="position: sticky; top: 0; height: 100vh; overflow: hidden">
+    <div style="position: sticky; top: 0; height: 100vh; overflow: hidden; background: #111827">
       <Contact />
     </div>
   </div>
