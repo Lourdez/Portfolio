@@ -5,7 +5,7 @@ import { education } from '../data/portfolio.js'
 </script>
 
 <template>
-  <section id="education" class="h-full flex items-center py-8 px-6">
+  <section id="education" class="min-h-full flex items-center py-8 px-6">
     <div class="max-w-[1100px] mx-auto">
       <SectionLabel>Education</SectionLabel>
       <SectionTitle>Academic Background</SectionTitle>

@@ -37,7 +37,7 @@ const links = [
 <template>
   <section
     id="contact"
-    class="h-full flex items-center py-8 px-6 bg-bg-secondary relative overflow-hidden"
+    class="min-h-full flex items-center py-8 px-6 bg-bg-secondary relative overflow-hidden"
   >
     <div
       class="absolute right-0 top-1/2 -translate-y-1/2 font-extrabold leading-none text-text-primary opacity-[0.025] select-none pointer-events-none"
