@@ -34,7 +34,7 @@ const groups = [
 <template>
   <section
     id="certifications"
-    class="py-32 px-6 bg-bg-secondary relative overflow-hidden"
+    class="h-full flex items-center py-8 px-6 bg-bg-secondary relative overflow-hidden"
   >
     <div
       class="absolute right-0 top-1/2 -translate-y-1/2 font-extrabold leading-none text-text-primary opacity-[0.025] select-none pointer-events-none"
@@ -48,7 +48,7 @@ const groups = [
       <SectionLabel>Growth</SectionLabel>
       <SectionTitle>Certifications &amp; Learning Roadmap</SectionTitle>
 
-      <div v-for="g in groups" :key="g.label" class="mb-10">
+      <div v-for="g in groups" :key="g.label" class="mb-4">
         <Reveal>
           <h3 class="text-xs text-text-muted font-bold uppercase tracking-[3px] font-mono mb-5">
             {{ g.label }}

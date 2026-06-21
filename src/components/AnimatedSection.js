@@ -72,8 +72,8 @@ export const SectionTitle = defineComponent({
           h(
             'h2',
             {
-              class: 'font-extrabold leading-[1.05] mb-14 text-text-primary',
-              style: { fontSize: 'clamp(2.8rem, 6vw, 6rem)' },
+              class: 'font-extrabold leading-[1.05] mb-6 text-text-primary',
+              style: { fontSize: 'clamp(2rem, 4vw, 3.5rem)' },
             },
             slots.default?.()
           ),

@@ -13,7 +13,7 @@ const details = [
 <template>
   <section
     id="about"
-    class="min-h-screen flex items-center py-24 px-6 relative overflow-hidden"
+    class="h-full flex items-center py-8 px-6 relative overflow-hidden"
   >
     <!-- Background watermark -->
     <div

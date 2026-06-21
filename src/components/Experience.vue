@@ -6,7 +6,7 @@ import { experience } from '../data/portfolio.js'
 <template>
   <section
     id="experience"
-    class="min-h-screen flex items-center py-32 px-6 bg-bg-secondary relative overflow-hidden"
+    class="h-full flex items-center py-8 px-6 bg-bg-secondary relative overflow-hidden"
   >
     <div
       class="absolute left-0 top-1/2 -translate-y-1/2 font-extrabold leading-none text-text-primary opacity-[0.025] select-none pointer-events-none"
@@ -21,19 +21,19 @@ import { experience } from '../data/portfolio.js'
       <SectionTitle>Where I've Worked</SectionTitle>
 
       <Reveal v-for="(exp, idx) in experience" :key="exp.company" :delay="0">
-        <div :class="['mb-16', idx > 0 ? 'bg-bg-card border border-border rounded-2xl p-8' : '']">
+        <div :class="['mb-4', idx > 0 ? 'bg-bg-card border border-border rounded-2xl p-6' : '']">
           <div class="flex justify-between items-start flex-wrap gap-2 mb-2">
             <div>
               <h3
                 class="font-extrabold text-text-primary leading-tight"
-                :style="{ fontSize: idx === 0 ? 'clamp(1.8rem, 4vw, 3.5rem)' : 'clamp(1.4rem,3vw,2rem)' }"
+                :style="{ fontSize: idx === 0 ? 'clamp(1.4rem, 3vw, 2.5rem)' : 'clamp(1.1rem,2.5vw,1.6rem)' }"
               >
                 {{ exp.company }}
               </h3>
               <div class="text-accent font-semibold text-lg mt-1">{{ exp.role }}</div>
             </div>
           </div>
-          <div class="font-mono text-xs text-text-muted mb-8">
+          <div class="font-mono text-xs text-text-muted mb-3">
             {{ exp.period }} &bull; {{ exp.context }}
           </div>
 
